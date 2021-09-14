@@ -1,0 +1,42 @@
+﻿@model CapthaInMvc.Models.RegistrationModel
+@using CaptchaMvc.HtmlHelpers
+@{
+    ViewBag.Title = "Home Page";
+}
+<h2>
+    Index
+</h2>
+
+@using (Html.BeginForm("Index", "Home", FormMethod.Post, new { @enctype = "multipart/form-data", @id = "fromCaptcha" }))
+{
+    <div class="container">
+        <div class="row">
+            <div class="form-group">
+                @Html.LabelFor(model => model.Email, new { @class = "control-label" })
+                @Html.TextBoxFor(model => model.Email, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group">
+                @Html.LabelFor(model => model.UserName, new { @class = "control-label" })
+                @Html.TextBoxFor(model => model.UserName, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group">
+                @Html.LabelFor(model => model.UserPassword, new { @class = "control-label" })
+                @Html.PasswordFor(model => model.UserPassword, new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group">
+                @Html.MathCaptcha()
+                @*@Html.Captcha("Try Another","Enter the text you  see above",3,"is Required Field",true)*@
+                <p class="text-danger">@ViewBag.ErrorMessage</p>
+            </div>
+        </div>
+        <input type="submit" value="Submit" class="btn btn-primary"/>
+    </div>
+
+}
